@@ -10,21 +10,27 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Sara Sulis">
-        <meta name="keywords" content="accessori per la casa">   
+        <meta name="keywords" content="accessori per la casa login">  
+        <meta name="description" content="pagina di login">
     </head>
     <body>
-        <form name="dati" action="login.html" method="post">
+        <form name="dati" method="post">
+        <!--Inserisco gli input per richiedere username e password-->
             <div>
             <label for="primo"> USERNAME </label>
             <input type='text' name='primo' size='20' id="primo" value="username"/> 
             <label for="pass"> PASSWORD </label>
             <input type='password' size='10' name='pass' id="pass" value="password"/>
+            <!--Inserisco i bottoni invio e reset-->
             <input type="submit" value="Invia"> 
             <input type="reset"  value="Azzera">
             </div>
+        <!--sezione di navigazione con Collegamenti alle pagine-->
+        <nav>
             <a href="cliente.html"> Vai nell'area clienti</a>
             <a href="venditore.html"> Vai nell'area venditori</a>
             <a href="descrizione.html"> Chi siamo</a>
+        </nav>
         </form>
     </body>
 </html>
