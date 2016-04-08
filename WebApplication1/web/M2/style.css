@@ -1,0 +1,152 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24-mar-2016, 16.37.32
+    Author     : sara
+*/
+/*Inserisco il colore di sfondo, il font e il colore del testo  */
+body
+{ 
+    background-color: bisque;
+    font-size:14px;
+    font-family: "Open Sans", Times new roman , sans-serif;
+    color: black;
+}
+ 
+/*Inserisco il font e il colore per i tag h1-h3*/
+h1
+{
+    text-align: center;
+    font-family: "Open Sans", Sign Painter;
+    color: deepskyblue;
+}
+
+h2
+{
+    font-family:"Open Sans", Verdana;
+    color: darkcyan;
+}
+
+h3
+{
+    font-family:"Open Sans", Arriciati;
+    color: darkcyan;
+}
+
+/*Inserisco le proprietà per i link visitati*/
+a:link
+{
+    font-family: Italic;
+    color: darkcyan;
+}
+/*proprietà per i link visitati*/
+a:visited
+{
+    text-decoration: underline;
+    
+} 
+/*lo stile per quando ci passo sopra con il mouse*/
+a:hover
+{
+    font-weight: bold;
+}
+/*visualizzazione campi di input*/
+input:focus
+{
+    background-color: aquamarine;
+}
+/*Proprietà per l'intestazione'*/
+th
+{
+   font-family: "Open Sans", Verdana;
+   color: deepskyblue;
+   font-size:16px;
+   border: 1px solid;
+   border-color: darkcyan;
+   text-align: center;
+   
+}
+/*Proprietà per l'intera tabella'*/
+table
+{
+    padding: auto;
+    width: 90%;
+    height: 300px;
+    border: 1px solid;
+    border-color: darkcyan ;  
+    border-collapse:collapse;
+}
+/*Proprietà per le celle*/
+td
+{
+    border: 1px solid ;
+    border-color: darkcyan;  
+    text-align: center;
+}
+
+/*cambio il colore di sfondo delle righe pari(even)*/
+tr:nth-child(even)
+{
+    background-color: aliceblue ;
+}
+
+/*cambio il colore di sfondo delle righe dispari(odd))*/
+tr:nth-child(odd)
+{
+    background-color: beige ;
+}
+/*div dimensioni intestazione*/
+#intestazione
+{
+    position: absolute;
+    width: 200%;
+    height: 200px;
+    top: 540px;
+    left: 2%;
+}
+/*proprietà bottoni*/
+.pulsanti
+{
+   border-bottom-color:  aquamarine;
+   text-align: center;
+   margin: 5px;
+       
+}
+
+/*stile form per inserire l'oggetto e per il login*/
+.form
+{
+   width: 600px;
+   background:aliceblue;
+   padding: 30px;
+   overflow: hidden;
+}
+/*proprietà label*/
+label
+{
+    display: block;
+    line-height: 20px;
+    width: 200px;
+}
+
+label::after, label::before
+{
+   content: '\A';
+   white-space: pre;
+}
+/*proprietà input*/
+textArea
+{
+    border: 2px solid;
+    border-color:darkcyan;
+    width: 30%;
+}
+input
+{
+   border: 2px solid;
+   border-color:darkcyan; 
+   width: 30%;
+}
