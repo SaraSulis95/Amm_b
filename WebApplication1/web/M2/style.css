@@ -20,7 +20,7 @@ body
 h1
 {
     text-align: center;
-    font-family:"Open Sans", Sign Painter;
+    font-family: "Open Sans", Sign Painter;
     color: deepskyblue;
 }
 
@@ -189,8 +189,8 @@ input
    
 }
 /*Per quelli intermedi utilizzare massimo due colonne.*/
-@media screen and(min-width: 480px)
-              and(max-width: 1024px)
+@media screen and (min-width: 480px)
+              and (max-width: 1024px)
 {
    .page
     {
