@@ -14,11 +14,25 @@ and open the template in the editor.
         <link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
+        <div class="page">
+        <div class="header">
         <h1> Area Venditori </h1>
-        <div class="form">
+  
         <h2> In questa pagina è possibile inserire gli oggetti che si vogliono vendere</h2> 
         <!--Richiesta dei dati per la descrizione dell'oggetto che il venditore vuole vendere
             le richiste vengono fatte attraverso le diverse tipologie di input -->
+        </div>
+        <div class="navigazione">
+        <!--la sezione di navigazione con i collegamenti che rimandano alle 
+        pagine descrizione e login-->
+        <nav>
+            <div>
+            <a href="descrizione.html"> Chi siamo </a>
+            </div>
+            <a href="login.html"> Vai al login. </a>
+        </nav>
+        </div>
+        <div class="content">
         <form name="dati"  method="get">
                <label for="oggetto"> Nome oggetto </label>
                <input type='text' name='oggetto' id='oggetto'> 
@@ -40,16 +54,15 @@ and open the template in the editor.
             </div>
             
         </form>
-        <!--la sezione di navigazione con i collegamenti che rimandano alle 
-        pagine descrizione e login-->
-        <nav>
-            <div class="link">
-            <div>
-            <a href="descrizione.html"> Chi siamo </a>
-            </div>
-            <a href="login.html"> Vai al login. </a>
-            </div>
-        </nav>
-  
+        </div>
+        
+        <div class="footer">
+            <p> HOMEDECOR, 
+            © Homedecor S.n.c - Copyright 2016 - 2020 - Tutti i diritti riservati
+                        Via Sulis 76/85, Cagliari
+                    P.Iva: 0787361086 n. iscrizione - Rea MI - 1987381
+            </p>
+        </div>
+        </div>
     </body>
 </html>

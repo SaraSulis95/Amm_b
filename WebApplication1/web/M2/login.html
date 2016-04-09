@@ -15,10 +15,25 @@ and open the template in the editor.
         <link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
+        <div class="page">
+        <div class="header">
         <h1> Login </h1>
+        </div>
+        <div class="navigazione">
+        <!--sezione di navigazione con Collegamenti alle pagine-->
+        <nav>
+            <div class="link">
+            <a href="cliente.html">Vai nell'area clienti</a>
+            <div>
+            <a href="venditore.html">Vai nell'area venditori</a>
+            </div>
+            <a href="descrizione.html">Chi siamo</a>
+            </div>
+        </nav>
+        </div>
+        <div class="content">
         <form name="dati" method="post">
         <!--Inserisco gli input per richiedere username e password-->
-        <div class="form">
             <div>
             <label for="primo"> USERNAME </label>
             <input type='text' name='primo' id="primo" value="username"/> 
@@ -30,17 +45,16 @@ and open the template in the editor.
             <input type="submit" value="Invia"> 
             <input type="reset"  value="Azzera">
             </div>
-        </div>
-        <!--sezione di navigazione con Collegamenti alle pagine-->
-        <nav>
-            <div class="link">
-            <a href="cliente.html">Vai nell'area clienti</a>
-            <div>
-            <a href="venditore.html">Vai nell'area venditori</a>
-            </div>
-            <a href="descrizione.html">Chi siamo</a>
-            </div>
-        </nav>
         </form>
+        </div>
+        
+        <div class="footer">
+            <p> HOMEDECOR, 
+            © Homedecor S.n.c - Copyright 2016 - 2020 - Tutti i diritti riservati
+                        Via Sulis 76/85, Cagliari
+                    P.Iva: 0787361086 n. iscrizione - Rea MI - 1987381
+            </p>
+        </div>
+        </div>
     </body>
 </html>

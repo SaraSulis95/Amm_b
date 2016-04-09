@@ -11,8 +11,8 @@ and open the template in the editor.
 body
 { 
     background-color: bisque;
-    font-size:14px;
-    font-family: "Open Sans", Times new roman , sans-serif;
+    font-size: 14px;
+    font-family: "Open Sans", Times new roman, sans-serif;
     color: black;
 }
  
@@ -20,7 +20,7 @@ body
 h1
 {
     text-align: center;
-    font-family: "Open Sans", Sign Painter;
+    font-family:"Open Sans", Sign Painter;
     color: deepskyblue;
 }
 
@@ -54,9 +54,19 @@ a:hover
     font-weight: bold;
 }
 /*visualizzazione campi di input*/
-input:focus
+input:focus, textArea:focus
 {
     background-color: aquamarine;
+    border-color: deepskyblue;
+}
+
+/*Proprietà per l'intera tabella'*/
+table
+{
+    width: 90%;
+    height: 300px;
+    border: 1px solid;
+    border-color: darkcyan;  
 }
 /*Proprietà per l'intestazione'*/
 th
@@ -69,20 +79,10 @@ th
    text-align: center;
    
 }
-/*Proprietà per l'intera tabella'*/
-table
-{
-    padding: auto;
-    width: 90%;
-    height: 300px;
-    border: 1px solid;
-    border-color: darkcyan ;  
-    border-collapse:collapse;
-}
 /*Proprietà per le celle*/
 td
 {
-    border: 1px solid ;
+    border: 1px solid;
     border-color: darkcyan;  
     text-align: center;
 }
@@ -90,37 +90,29 @@ td
 /*cambio il colore di sfondo delle righe pari(even)*/
 tr:nth-child(even)
 {
-    background-color: aliceblue ;
+    background-color: aliceblue;
 }
 
 /*cambio il colore di sfondo delle righe dispari(odd))*/
 tr:nth-child(odd)
 {
-    background-color: beige ;
-}
-/*div dimensioni intestazione*/
-#intestazione
-{
-    position: absolute;
-    width: 200%;
-    height: 200px;
-    top: 540px;
-    left: 2%;
+    background-color: beige;
 }
 /*proprietà bottoni*/
 .pulsanti
 {
-   border-bottom-color:  aquamarine;
+   border-bottom-color: aquamarine;
    text-align: center;
    margin: 5px;
+   width: 400px;
        
 }
 
 /*stile form per inserire l'oggetto e per il login*/
-.form
+form
 {
+   border-radius: 15px;
    width: 600px;
-   background:aliceblue;
    padding: 30px;
    overflow: hidden;
 }
@@ -140,13 +132,109 @@ label::after, label::before
 /*proprietà input*/
 textArea
 {
+    border-radius: 15px;
     border: 2px solid;
-    border-color:darkcyan;
+    border-color: darkcyan;
     width: 30%;
 }
+
 input
 {
    border: 2px solid;
-   border-color:darkcyan; 
+   border-color: darkcyan; 
+   border-radius: 15px;
    width: 30%;
+}
+/*layout responsive per tutte le pagine
+
+/*Per larghezze maggiori o uguali a 1024px utilizzare 
+    un layout a due o tre colonne*/
+@media screen and (min-width: 1024px)
+{
+    .page
+    {
+        width: 90%;
+        padding-left: 120px;
+    }
+    .header 
+    {
+        background-color: aliceblue;
+        border-color: gray;
+        width: 90%;
+        height: 100px;
+    }
+        
+    .content
+    {
+        margin-right: 180px;
+        float: none;
+    }
+    
+    .navigazione
+    {
+        width: 180px;
+        padding: 5px;
+        height: 230px; 
+        float: right;
+    }
+    
+    .footer
+    {
+        background-color: aliceblue;
+        border-color: gray;
+        width: 90%;
+        height: 80px;
+        clear: both;
+    }
+   
+}
+/*Per quelli intermedi utilizzare massimo due colonne.*/
+@media screen and(min-width: 480px)
+              and(max-width: 1024px)
+{
+   .page
+    {
+        width: 90%;
+        padding-left: 120px;
+    }
+    .header 
+    {
+        background-color: aliceblue;
+        border-color: gray;
+        width: 90%;
+        height: 100px;
+    }
+        
+    .content
+    {
+        margin-right: 180px;
+        float: none;
+    }
+    
+    .navigazione
+    {
+        width: 180px;
+        padding: 5px;
+        height: 220px; 
+        float: right;
+    }
+    
+    .footer
+    {
+        background-color: aliceblue;
+        border-color: gray;
+        width: 90%;
+        height: 80px;
+        clear: both;
+    }
+}
+
+/*Per larghezze minori o uguali a 480px utilizzare
+    un layout ad una sola colonna*/
+@media screen and (max-width: 480px)
+{
+    .page
+    {
+        padding: 2px;
+    }
 }

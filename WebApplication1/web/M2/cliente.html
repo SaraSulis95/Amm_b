@@ -14,12 +14,26 @@ and open the template in the editor.
         <link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
+    <div class="page">
+        <div class="header">
         <h1> Area Clienti </h1>
         <h2> In questa pagina potete trovare la descrizione di alcuni oggetti </h2>
         <!--ho creato la tabella con 7 oggetti, ho pensato di inserire nella prima riga l'intestazione 
         di ogni colonna e nelle successive righe il nome, l'immagine, il prezzo e la quantità dell'oggetto-->
+        </div>
+        <!-- Sezione di navigazione con due collegamenti alle pagine descrizione e login-->
+        <div class="navigazione">
+        <nav> 
+            <div class="link">
+            <a href="descrizione.html"> Chi siamo </a> 
+            <div>
+            <a href="login.html"> Vai al login </a>
+            </div>
+            </div>
+        </nav>
+        </div>
+        <div class="content">
         <table>
-            <div id="intestazione" >
             <tr>
                 <th> Nome </th>
                 <th> Foto </th>
@@ -27,7 +41,6 @@ and open the template in the editor.
                 <th> Prezzo in euro </th>
                 <th> Aggiungi al carrello </th>
             </tr>
-            </div>
             <tr>
                 <!--primo oggetto -->
                 <td> Scatola da the </td>
@@ -92,14 +105,15 @@ and open the template in the editor.
                 <td> <a href="cliente.html"> Aggiungi al carrello </a> </td>
             </tr>
         </table> 
-        <!-- Sezione di navigazione con due collegamenti alle pagine descrizione e login-->
-        <nav> 
-            <div class="link">
-            <a href="descrizione.html"> Vai nella pagina descrizione </a> 
-            <div>
-            <a href="login.html"> Vai al login </a>
-            </div>
-            </div>
-        </nav>
+        
+        </div>
+        <div class="footer">
+            <p> HOMEDECOR, 
+            © Homedecor S.n.c - Copyright 2016 - 2020 - Tutti i diritti riservati
+                        Via Sulis 76/85, Cagliari
+                    P.Iva: 0787361086 n. iscrizione - Rea MI - 1987381
+            </p>
+        </div>
+    </div>
     </body>
 </html>
