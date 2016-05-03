@@ -1,23 +1,28 @@
+<%-- 
+    Document   : login
+    Created on : 30-apr-2016, 17.57.00
+    Author     : sara
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title> Login </title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Sara Sulis">
         <meta name="keywords" content="accessori per la casa login">  
         <meta name="description" content="pagina di login">
+        <meta charset="utf-8"/>
         <link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
     </head>
     <body>
         <div class="page">
         <div class="header">
-        <h1> Login </h1>
+            <div logo> 
+            <h1>Login</h1>
+            </div>
         </div>
         <div class="navigazione">
         <!--sezione di navigazione con Collegamenti alle pagine-->

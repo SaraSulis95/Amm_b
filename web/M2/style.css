@@ -23,6 +23,19 @@ h1
     font-family: "Open Sans", Sign Painter;
     color: deepskyblue;
 }
+/*h1
+{
+    position: relative;
+}
+h1 span:before {
+
+    content: url("img/chiave.png");
+    position: absolute;
+}
+h1 span:before {
+    right: 20%;
+    margin-right: 30px;
+}*/
 
 h2
 {
