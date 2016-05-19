@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title> Login </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Sara Sulis">
+        <meta name="keywords" content="accessori per la casa login">  
+        <meta name="description" content="pagina di login">
+        <meta charset="utf-8"/>
+        <link href="style.css" rel="stylesheet" type="text/css" media="screen"/>
+    </head>
+    <body>
+        <div class="page">
+        <div class="header">
+            <div class="logo">
+            <h1>Login</h1>
+            </div>
+        </div>
+        <div class="navigazione">
+        <!--sezione di navigazione con Collegamenti alle pagine-->
+        <nav>
+            <div class="link">
+            <a href="cliente.html">Vai nell'area clienti</a>
+            <div>
+            <a href="venditore.html">Vai nell'area venditori</a>
+            </div>
+            <a href="descrizione.html">Chi siamo</a>
+            </div>
+        </nav>
+        </div>
+        <div class="content">
+        <form name="dati" method="post">
+        <!--Inserisco gli input per richiedere username e password-->
+            <div>
+            <label for="primo"> USERNAME </label>
+            <input type='text' name='primo' id="primo" value="username"/> 
+            <label for="pass"> PASSWORD </label>
+            <input type='password' name='pass' id="pass" value="password"/>
+            </div>
+            <!--Inserisco i bottoni invio e reset-->
+            <div class="pulsanti">
+            <input type="submit" value="Invia"> 
+            <input type="reset"  value="Azzera">
+            </div>
+        </form>
+        </div>
+        
+        <div class="footer">
+            <p> HOMEDECOR, 
+            © Homedecor S.n.c - Copyright 2016 - 2020 - Tutti i diritti riservati
+                        Via Sulis 76/85, Cagliari
+                    P.Iva: 0787361086 n. iscrizione - Rea MI - 1987381
+            </p>
+        </div>
+        </div>
+    </body>
+</html>
