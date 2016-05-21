@@ -3,7 +3,7 @@
     Created on : 30-apr-2016, 17.56.18
     Author     : sara
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,7 @@
         </nav>
         </div>
         <div class="content">
-        <form name="dati"  method="get">
+        <form action="venditore.html" name="dati"  method="post">
                <label for="oggetto"> Nome oggetto </label>
                <input type='text' name='oggetto' id='oggetto'> 
                <label for="percorso" > Inserisci l'URL di un' immagine descrittiva dell'oggetto </label>
@@ -53,7 +53,7 @@
             
             <!--I due bottoni invio e reset-->
             <div class="pulsanti">
-               <input type="submit" value="Invia"> 
+               <input name= "submit" type="submit" value="Invia"> 
                <input type="reset"  value="Azzera">
             </div>
             
@@ -61,7 +61,7 @@
         </div>
         
         <div class="footer">
-            <jsp:include page="Web Pages/M2/ripetuti.jsp"/>
+            <jsp:include page="ripetuti.jsp"/>
         </div>
         </div>
     </body>

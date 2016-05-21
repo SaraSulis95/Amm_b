@@ -5,13 +5,20 @@
  */
 package Amm.Servlet;
 
+import Amm.Classi.Cliente_factory;
+import Amm.Classi.OggettiFactory;
+import Amm.Classi.Utenti_cliente;
+import Amm.Classi.Utenti_venditori;
+import Amm.Classi.Venditore_factory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,61 +40,64 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(true);
         
-         HttpSession session = request.getSession(true);
         /*controllare se si sono autenticati in modo esatto*/
-        if (request.getParameter("Submit") != null) {
-            String username = request.getParameter("Username");
-            String password = request.getParameter("Password");
+        if (request.getParameter("submit") != null) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
 
             ArrayList<Utenti_cliente> listaClienti = Cliente_factory.getInstance()
                     .getClientilist();
-            ArrayList<Utenti_venditori> listaVenditori = Venditore_factory.getInstance()
-                    .getVenditorilist();
-
             /*prendi ogni elemento di questa lista e fai queste operazioni*/
-            for (Utenti_cliente u : listaClienti && Utenti_venditori u: listaVenditori) 
-            {
-            /*controllo che sia un cliente o un venditore*/
-                if (username.getUsername().equals(username) && u.getPassword().equals(password)) {
-                    
-                    
-                    session.setAttribute("loggedId", true);
-                    session.setAttribute("id", u.getId());
+            
+            for (Utenti_cliente u : listaClienti) {
 
-                    if (u instanceof Utenti_cliente)
-                    {
-                        request.setAttribute ("cliente", u);
-                    request.setAttribute("venditori", Venditore_factory
-                                .getInstance().getVenditorilist());
-                    }
-                        /*se è un cliente setto l'attributo*/
-                    request.getRequestDispatcher("cliente.jsp").forward(request, response);
+                /*controllo che sia un cliente o un venditore*/
+                if (u.getUsername()!=  null && u.getUsername().equals(username) && 
+                        u.getPassword() != null && u.getPassword().equals(password)) {
+                    
+                session.setAttribute("loggedIn", true);
+                session.setAttribute("id", u.getId());
                 
-                    else{
-                    request.setAttribute("venditore", u);
-                    /*se è uun venditore setto l'attributo*/
-                     request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                    }
-
+                request.setAttribute("cliente", u);
+                request.setAttribute("listaOgetti", OggettiFactory.getInstance().getOggettilist());
+                
+                session.setAttribute("loginVenditore", false);
+                session.setAttribute("loginCliente", true);
+                
+                request.getRequestDispatcher("cliente.jsp").forward(request, response);
                 }
             }
-        }
-        else{
-            request.setAttribute("error", true);
-            request.getRequestDispatcher("login.jsp")
-                .forward(request, response);
-            
-            /*devo passare il controllo alla pagina login.jsp
-            e qui controllo se questo attributo è stato settato e stampo la scritta*/ 
-                               
-        }
-        /*richiamare una pagina*/
-        request.getRequestDispatcher("login.jsp")
-                .forward(request, response);
-        }
-    }
+                
+                ArrayList<Utenti_venditori> listaVenditori = Venditore_factory.getInstance()
+                        .getVenditorilist();
 
+                for (Utenti_venditori u : listaVenditori){
+                /*controllo che sia un cliente o un venditore*/ 
+                    if (u.getUsername().equals(username) && 
+                            u.getPassword().equals(password)) {
+
+                        session.setAttribute("loggedIn", true);
+                        session.setAttribute("id", u.getId());
+                        
+                        session.setAttribute("loginVenditore", true);
+                        session.setAttribute("loginCliente", false);
+                         
+
+                        /*passo la pagina venditore*/
+                        request.getRequestDispatcher("venditore.jsp").forward(request, response);
+
+                    }
+                }
+    
+            request.setAttribute("Errore", true);
+        }    
+            /*richiamare una pagina*/
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+    
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

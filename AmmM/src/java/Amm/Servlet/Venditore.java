@@ -36,28 +36,38 @@ public class Venditore extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
          HttpSession session = request.getSession(true);
         
         /*controllare se si sono autenticati in modo esatto*/
-        if (request.getParameter("Submit") != null) {
-            String username = request.getParameter("Username");
-            String password = request.getParameter("Password");
-
-            ArrayList<Utenti_venditori> listaVenditori = Venditore_factory.getInstance()
-                    .getVenditorilist();
-            
-            /*controllo che sia un venditore*/
-            for(Utenti_venditori v : listaVenditori){
-                 if(v.getUsername().equals(username) && 
-                        v.getPassword().equals(password)) {
-                     
-                      session.setAttribute("loggedId", true);
-                      session.setAttribute("id", v.getId());
-                 }
-                    request.setAttribute("venditore", v);
+        if (request.getParameter("submit") == null) {     
+            request.getRequestDispatcher("venditore.jsp").forward(request, response);
+        }    
+        
+                
+                String nome =  request.getParameter("nome");
+                String url = request.getParameter("url");
+                String quantita_string = request.getParameter("quantita");
+                String prezzo_string = request.getParameter("prezzo");
+                int prezzo = -1;
+                int quantita = -1;
+                
+                //converto
+                try{
+                    prezzo = Integer.parceInt(prezzo_string);
+                    quantita = Integer.parceInt(quantita_string);
+                }
+                catch(RuntimeException error){
+                    request.setAttribute("error", true);
                     request.getRequestDispatcher("venditore.jsp").forward(request, response);
-                 }
+                }
+        
+                 
         }
+     Integer.parse//per convertire
+          
+               devo recuperare tutto dal form guardare se sono diversi da null 
+               passa solo string quindi bisogna convertire
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

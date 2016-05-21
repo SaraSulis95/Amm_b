@@ -49,14 +49,14 @@
                 <th> Aggiungi al carrello </th>
             </tr>
             <tr>
-                <c:forEach var = "a" items = "${listaOggetti}">
+                <c:forEach var = "oggetto" items = "${listaOggetti}">
                 <!--genero gli oggetti dinamicamente-->
-                <td> "${a.nome}" </td>
-                <td> <img src="${a.url}" title="${a.nome()}"
-                      alt="${a.nome}"></td>
-                <td> "${a.prezzo()}" </td>
-                <td> "${a.quantita()}" </td>
-                <td> <a href="cliente.html=${a.idOggetto}"> Aggiungi al carrello </a> </td>
+                <td> "${oggetto.getNome}" </td>
+                <td> <img src="${oggetto.getUrl}" title="${oggetto.getNome()}"
+                      alt="${oggetto.getNome}"></td>
+                <td> "${oggetto.getPrezzo()}" </td>
+                <td> "${oggetto.getQuantita()}" </td>
+                <td> <a href="cliente.html=${oggetto.getIdoggetto}"> Aggiungi al carrello </a> </td>
                 </c:forEach>
             </tr>
            
@@ -64,7 +64,7 @@
         
         
         <div class="footer">
-            <jsp:include page="Web Pages/M2/ripetuti.jsp"/>           
+            <jsp:include page="ripetuti.jsp"/>           
         </div>
     </div>
     </body>

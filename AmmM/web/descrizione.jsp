@@ -86,7 +86,7 @@
                 <p>In questa sezione potete trovare tutti gli accessori per il vostro giardino o per la vostra veranda.</p>
         </div>
         <div class="footer">
-            <jsp:include page="Web Pages/M2/ripetuti.jsp"/>
+            <jsp:include page="ripetuti.jsp"/>
         </div>
         </div>
     </body>

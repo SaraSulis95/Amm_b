@@ -3,7 +3,7 @@
     Created on : 30-apr-2016, 17.57.00
     Author     : sara
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,6 +23,9 @@
             <div logo> 
             <h1>Login</h1>
             </div>
+            <c:if test="${Errore != null}">
+                   <p>Errore di autentiticazione</p>
+            </c:if>
         </div>
         <div class="navigazione">
         <!--sezione di navigazione con Collegamenti alle pagine-->
@@ -37,18 +40,15 @@
         </nav>
         </div>
         <div class="content">
-        
+        <form action= "login.html" method="post">
         <!--Inserisco gli input per richiedere username e password-->
             <div>
-                <c:if test="${errore == true}">
-                   <p>"Errore di autentiticazione"</p>;
-                </c:if>
-                <label for="primo"> USERNAME </label>
-                <input type='text' name='primo' id="primo" value="username"/> 
-                <label for="pass"> PASSWORD </label>
-                <input type='password' name='pass' id="pass" value="password"/>
+                <label for="username"> USERNAME </label>
+                <input type='text' name='username' id="username" value="username"/> 
+                <label for="password"> PASSWORD </label>
+                <input type='password' name='password' id="password" value="password"/>
             </div>
-           
+        </form>
             <!--Inserisco i bottoni invio e reset-->
             <div class="pulsanti">
                 <input type="submit" value="Invia"> 
@@ -58,7 +58,7 @@
         </div>
         
         <div class="footer">
-            <jsp:include page="Web Pages/M2/ripetuti.jsp"/>
+            <jsp:include page="ripetuti.jsp"/>
         </div>
         </div>
     </body>
