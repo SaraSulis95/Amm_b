@@ -53,7 +53,7 @@
             
             <!--I due bottoni invio e reset-->
             <div class="pulsanti">
-               <input name= "submit" type="submit" value="Invia"> 
+               <input name= "Submit" type="Submit" value="Invia"> 
                <input type="reset"  value="Azzera">
             </div>
             

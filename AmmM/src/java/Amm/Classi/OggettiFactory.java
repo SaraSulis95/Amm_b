@@ -5,13 +5,25 @@
  */
 package Amm.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author sara
  */
 public class OggettiFactory {
+    
+    String connectionString;
+    
     
  /*restituisce sempre lo stesso,
     basta fare la chiamata all'oggetto statico*/
@@ -23,72 +35,102 @@ public class OggettiFactory {
         }
         return singleton;
     }
+    public OggettiFactory(){
+    }
+    private String nome;
+    private int prezzo;
+    private int quantita;
+    private String url;
+    private int id_saldo;
+    private int id_venditore;
+    private int id_oggetto;
+    private String sql;
     
-    private final ArrayList<Oggetti_vendita> listaOggetti = new ArrayList<>();
         
-    public OggettiFactory (){
-      
-    
-        // tutti gli oggetti del sistema  
-        Oggetti_vendita oggetto_1 = new Oggetti_vendita();
-        oggetto_1.setNome("Cuscino");
-        oggetto_1.setIdoggetto(25);
-        oggetto_1.setUrl(5246);
-        oggetto_1.setQuantita(2);
-        oggetto_1.setPrezzo(25);
-        oggetto_1.setCategoria("Soggiorno");
-        listaOggetti.add(oggetto_1);
-        Oggetti_vendita oggetto_2 = new Oggetti_vendita();
-        oggetto_2.setNome("Scattola");
-        oggetto_2.setIdoggetto(53);
-        oggetto_2.setUrl(546);
-        oggetto_2.setQuantita(2);
-        oggetto_2.setPrezzo(241);
-        oggetto_2.setCategoria("Cucina");
-        listaOggetti.add(oggetto_2);
-        Oggetti_vendita oggetto_3 = new Oggetti_vendita();
-        oggetto_3.setNome("Lampada");
-        oggetto_3.setIdoggetto(98);
-        oggetto_3.setUrl(5846);
-        oggetto_3.setQuantita(5);
-        oggetto_3.setPrezzo(16);
-        oggetto_3.setCategoria("Bagno");
-        listaOggetti.add(oggetto_3);
-        
-    }
-        
-        //metodo che restituisce la lista con gli oggetti del sistema
-        
-       public ArrayList <Oggetti_vendita> getOggettilist()
-       {
-                    return listaOggetti;
-       }
-      
-        //resituisce l'oggetto in base all'id 
-        public Oggetti_vendita getOggetto(int idOggetto)
-        {
-            for(Oggetti_vendita u : listaOggetti)
-            {
-                if(u.idOggetto == idOggetto)
-                return u;
-        }
-        
-        return null;
-    }
-        
-        //resituisce l'oggetto in base ala categoria
-        public Oggetti_vendita getCategoria(String categoria)
-        {
-            for(Oggetti_vendita u : listaOggetti)
-            {
-                if(u.categoria.equals(categoria))
-                return u;
-        }
-        
-        return null;
-    }
-   
-         
-}
+    public Oggetti_vendita getOggetto(String nome, int prezzo, int quantita, int url)
+    {
 
+        try {
+            String db = "jdbc:derby://localhost:1527/ammdb";
+            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
+            // Si mettono dei punti di domanda al posto dei valori
+            String sql2 = "select * from oggetto where "
+                    + "nome = ? and prezzo = ? + quantita = ? + url = ?";
+            // Si crea un prepared statement
+            PreparedStatement stmt = conn.prepareStatement(sql2);
+            // Si associano valori e posizioni di placeholder
+            stmt.setString(1, nome);
+            stmt.setInt(2, prezzo);
+            stmt.setInt(3, quantita);
+            stmt.setInt(4, url);
+
+            ResultSet set = stmt.executeQuery();
+
+            if (set.next()) {
+                Oggetti_vendita oggetto = new Oggetti_vendita();
+                oggetto.nome = set.getString("nome");
+                oggetto.prezzo = set.getInt(prezzo);
+                oggetto.quantita = set.getInt(quantita);
+                oggetto.url = set.getString(url);
+
+                stmt.close();
+                conn.close();
+                return oggetto;
+            }
+
+        } catch (SQLException e) {
+
+            Logger.getLogger(OggettiFactory.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return null;
+    }
+     public Oggetti_vendita getCrea(int idOggetto) throws SQLException{
+
+    try {
+            String db = "jdbc:derby://localhost:1527/ammdb";
+            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
+            Statement stmt = conn.createStatement();
+            String sql1;
+            sql1 = "INSERT INTO oggetto (id_oggetto,nome, url, "
+                + "prezzo, quantita, id_venditore, id_saldo)"+"VALUES(?,?,?,?,?,?)";
+        
+             PreparedStatement stmt = conn.prepareStatement(sql1);
+            // Si associano valori e posizioni di placeholder
+            stmt.setInt(1, id_oggetto);
+            stmt.setString(2, nome);
+            stmt.setInt(3, prezzo);
+            stmt.setInt(4, quantita);
+            stmt.setString(5, url);
+            stmt.setInt(6, id_venditore);
+            stmt.setInt(7, id_saldo);
+            
+            ResultSet set = stmt.executeQuery();
+            if (set.next()) {
+                Oggetti_vendita oggetto = new Oggetti_vendita();
+                oggetto.nome = set.getString("nome");
+                oggetto.prezzo = set.getInt(prezzo);
+                oggetto.quantita = set.getInt(quantita);
+                oggetto.url = set.getString("url");
+
+            stmt.close();
+            conn.close();
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(OggettiFactory.class.getName()).log(Level.SEVERE, null, e);
+        }
+    
+        return Oggetti_vendita;
+        }
+ public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
+    }
+    }
+     
 

@@ -10,10 +10,14 @@ package Amm.Classi;
  * @author sara
  */
 public class Oggetti_vendita {
+
+    static void add(Oggetti_vendita current) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
  public String nome;
     public int idOggetto;
-    public int url;
+    public String url;
     public int quantita;
     public int prezzo;
     public String categoria;
@@ -40,12 +44,12 @@ public class Oggetti_vendita {
         this.idOggetto=idOggetto;
     }
     
-    public int getUrl(){
-        return url;
+    public String getUrl(){
+        return "url";
     }
     
-     public void setUrl(int url){
-        this.url=url;
+     public void setUrl(String url){
+        this.url= url;
     }
     
     public int getQuantita(){

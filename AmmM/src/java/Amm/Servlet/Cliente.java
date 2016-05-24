@@ -46,11 +46,11 @@ public class Cliente extends HttpServlet {
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
 
-            ArrayList<Utenti_cliente> listaClienti = Cliente_factory.getInstance()
-                    .getClientilist();
+            //ArrayList<Utenti_cliente> listaClienti = Cliente_factory.getInstance()
+                    //.getClientilist();
             
             /*controllo che sia un cliente*/
-            for(Utenti_cliente c : listaClienti){
+            Utenti_cliente c = Cliente_factory.getInstance().getCliente(username, password);
                  if(c.getUsername().equals(username) && 
                         c.getPassword().equals(password)) {
                      

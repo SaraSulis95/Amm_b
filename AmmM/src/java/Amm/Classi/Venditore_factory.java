@@ -5,14 +5,22 @@
  */
 package Amm.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author sara
  */
 public class Venditore_factory {
-    
+   String connectionString;
 /*restituisce sempre lo stesso,
     basta fare la chiamata all'oggetto statico*/
     private static Venditore_factory singleton;
@@ -24,48 +32,58 @@ public class Venditore_factory {
         return singleton;
     }
     
-    private final ArrayList<Utenti_venditori> listaVenditori = new ArrayList<>();
         
     public Venditore_factory (){
-      
-    
-        // Venditori      
-        Utenti_venditori venditore_1 = new Utenti_venditori();
-        venditore_1.setUsername("Sara52");
-        venditore_1.setPassword("abcd");
-        venditore_1.setId(4);
-        listaVenditori.add(venditore_1);
-        Utenti_venditori venditore_2 = new Utenti_venditori();
-        venditore_2.setUsername("Alessandro86");
-        venditore_2.setPassword("abcde");
-        venditore_2.setId(5);
-        listaVenditori.add(venditore_2);
-        Utenti_venditori venditore_3 = new Utenti_venditori();
-        venditore_3.setUsername("Vittoria1995");
-        venditore_3.setPassword("abcdef");
-        venditore_3.setId(6);
-        listaVenditori.add(venditore_3);
-    }
-        
-        //metodo che restituisce la lista
-        
-       public ArrayList <Utenti_venditori> getVenditorilist()
-       {
-                    return listaVenditori;
-       }
-          
-        
-        public Utenti_venditori getVenditore(int id)
-        {
-            for(Utenti_venditori u : listaVenditori)
-            {
-                if(u.id == id)
-                return u;
+    } 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public Utenti_venditori getVenditore (String username, String password)
+    {
+       
+        try {
+            String db = "jdbc:derby://localhost:1527/ammdb";
+            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
+            // Si mettono dei punti di domanda al posto dei valori
+            String sql = "select * from venditore where "
+                    + "username = ? and password = ? ";
+            // Si crea un prepared statement
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            // Si associano valori e posizioni di placeholder
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet set = stmt.executeQuery();
+
+            if (set.next()) {
+                Utenti_venditori venditore = new Utenti_venditori();
+                venditore.username = set.getString("username");
+                venditore.password = set.getString("password");
+
+                stmt.close();
+                conn.close();
+                return venditore;
+            }
+
+        } catch (SQLException e) {
+
+            Logger.getLogger(Cliente_factory.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return null;
     }
    
-         
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
+    }
+
 }
 

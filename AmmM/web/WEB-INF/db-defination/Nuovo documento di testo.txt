@@ -1,0 +1,10 @@
+Le entità con i rispettivi attributi:
+Cliente (username,password, id_cliente,id_saldo ), id_saldo è la chiave esterna
+Venditore (username,password, id_venditore,id_saldo, id_oggetto ), id_saldo è la chiave esterna, id_oggetto chiave esterna 
+Oggetto (nome, url, quantita, prezzo, id_oggetto)
+Saldo(id_saldo, totale)
+
+RELAZIONI:
+Tra Cliente e saldo 1:1;
+Tra venditore e saldo 1:1;
+Tra venditore e oggetto 1:N;

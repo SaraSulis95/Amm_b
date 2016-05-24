@@ -40,7 +40,7 @@
         </nav>
         </div>
         <div class="content">
-        <form action= "login.html" method="post">
+        <form action= "login.html" method="get">
         <!--Inserisco gli input per richiedere username e password-->
             <div>
                 <label for="username"> USERNAME </label>
@@ -48,14 +48,12 @@
                 <label for="password"> PASSWORD </label>
                 <input type='password' name='password' id="password" value="password"/>
             </div>
-        </form>
             <!--Inserisco i bottoni invio e reset-->
             <div class="pulsanti">
-                <input type="submit" value="Invia"> 
+                <input name="Submit" type="submit" value="Invia"> 
                 <input type="reset"  value="Azzera">
             </div>
-        
-        </div>
+        </form>
         
         <div class="footer">
             <jsp:include page="ripetuti.jsp"/>

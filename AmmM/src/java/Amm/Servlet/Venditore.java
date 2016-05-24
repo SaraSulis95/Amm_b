@@ -5,11 +5,15 @@
  */
 package Amm.Servlet;
 
+import Amm.Classi.Cliente_factory;
 import Amm.Classi.Utenti_venditori;
 import Amm.Classi.Venditore_factory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,27 +51,25 @@ public class Venditore extends HttpServlet {
                 
                 String nome =  request.getParameter("nome");
                 String url = request.getParameter("url");
-                String quantita_string = request.getParameter("quantita");
-                String prezzo_string = request.getParameter("prezzo");
-                int prezzo = -1;
-                int quantita = -1;
-                
-                //converto
+                int quantita = Integer.parseInt (request.getParameter("quantita"));
+                int prezzo =Integer.parseInt (request.getParameter("prezzo"));
+  
                 try{
-                    prezzo = Integer.parceInt(prezzo_string);
-                    quantita = Integer.parceInt(quantita_string);
-                }
-                catch(RuntimeException error){
+                Venditore_factory.getInstance().Utenti_Venditori(nome, url, prezzo, quantita);
+                
+                }catch(SQLException error){
+                Logger.getLogger(Cliente_factory.class.getName()).log(Level.SEVERE, null, error);}
+            
                     request.setAttribute("error", true);
                     request.getRequestDispatcher("venditore.jsp").forward(request, response);
                 }
         
                  
         }
-     Integer.parse//per convertire
+    /* Integer.parse//per convertire
           
                devo recuperare tutto dal form guardare se sono diversi da null 
-               passa solo string quindi bisogna convertire
+               passa solo string quindi bisogna convertire*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

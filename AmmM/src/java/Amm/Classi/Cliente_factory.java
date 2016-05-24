@@ -5,15 +5,23 @@
  */
 package Amm.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author sara
  */
 public class Cliente_factory {
-    
-/*restituisce sempre lo stesso,
+
+    String connectionString;
+    /*restituisce sempre lo stesso,
     basta fare la chiamata all'oggetto statico*/
     private static Cliente_factory singleton;
 
@@ -23,50 +31,56 @@ public class Cliente_factory {
         }
         return singleton;
     }
-    
-    private ArrayList<Utenti_cliente> listaClienti = new ArrayList<Utenti_cliente>();
-        
-    public Cliente_factory (){
-      
-    
-        // Clienti      
-        Utenti_cliente cliente_1 = new Utenti_cliente();
-        cliente_1.setUsername("Adele65");
-        cliente_1.setPassword("tfg");
-        cliente_1.setId(0);
-        listaClienti.add(cliente_1);
-        Utenti_cliente cliente_2 = new Utenti_cliente();
-        cliente_2.setUsername("Paolo84");
-        cliente_2.setPassword("tfggt");
-        cliente_2.setId(2);
-        listaClienti.add(cliente_2);
-        Utenti_cliente cliente_3 = new Utenti_cliente();
-        cliente_3.setUsername("Claudio84");
-        cliente_3.setPassword("tfgtkg");
-        cliente_3.setId(3);
-        listaClienti.add(cliente_3);
+
+    public Cliente_factory() {
     }
-        
-        //metodo che restituisce la lista con i clienti
-        
-       public ArrayList <Utenti_cliente> getClientilist()
-       {
-                    return listaClienti;
-       }
-       
-        //restituisce il cliente
-        public Utenti_cliente getCliente(int id)
-        {
-            for(Utenti_cliente u : listaClienti)
-            {
-                if(u.id == id)
-                return u;
+
+    /*//metodo che restituisce la lista con i clienti
+    public ArrayList<Utenti_cliente> getClientilist() {
+        return listaClienti;
+    }*/
+
+    //restituisce il cliente
+    public Utenti_cliente getCliente(String username, String password) {
+
+        try {
+            String db = "jdbc:derby://localhost:1527/ammdb";
+            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
+            // Si mettono dei punti di domanda al posto dei valori
+            String sql = "select * from clienti where "
+                    + "username = ? and password = ? ";
+            // Si crea un prepared statement
+            PreparedStatement stmt = conn.prepareStatement(sql);
+// Si associano valori e posizioni di placeholder
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet set = stmt.executeQuery();
+
+            if (set.next()) {
+                Utenti_cliente cliente = new Utenti_cliente();
+                cliente.username = set.getString("username");
+                cliente.password = set.getString("password");
+
+                stmt.close();
+                conn.close();
+                return cliente;
+            }
+
+        } catch (SQLException e) {
+
+            Logger.getLogger(Cliente_factory.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return null;
     }
-   
-         
+ public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
+    }
+    
 }
-
-

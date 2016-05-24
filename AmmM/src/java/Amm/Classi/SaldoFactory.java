@@ -5,15 +5,22 @@
  */
 package Amm.Classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author sara
  */
 public class SaldoFactory {
-    
- private static SaldoFactory singleton;
+    String connectionString;
+    private static SaldoFactory singleton;
 
     public static SaldoFactory getInstance() {
         if (singleton == null) {
@@ -21,48 +28,55 @@ public class SaldoFactory {
         }
         return singleton;
     }
-
-    
-    private final ArrayList<Saldo> listaSaldi = new ArrayList<>();
         
-    public SaldoFactory (){
+    public SaldoFactory (){   
+    }
       
     
-        // tutti i conti del sistema  
-        Saldo saldo_1 = new Saldo();
-        saldo_1.setSaldoTot(255);
-        saldo_1.setIdSaldo(0);
-        listaSaldi.add(saldo_1);
-        Saldo saldo_2 = new Saldo();
-        saldo_2.setSaldoTot(200);
-        saldo_2.setIdSaldo(2);
-        listaSaldi.add(saldo_2);
-        Saldo saldo_3 = new Saldo();
-        saldo_3.setSaldoTot(100);
-        saldo_3.setIdSaldo(3);
-        listaSaldi.add(saldo_3);
-        Saldo saldo_4 = new Saldo();
-        saldo_4.setSaldoTot(1000);
-        saldo_4.setIdSaldo(4);
-        listaSaldi.add(saldo_4);
-        Saldo saldo_5 = new Saldo();
-        saldo_5.setSaldoTot(500.66);
-        saldo_5.setIdSaldo(5);
-        listaSaldi.add(saldo_5);
-        Saldo saldo_6 = new Saldo();
-        saldo_6.setSaldoTot(256);
-        saldo_6.setIdSaldo(6);
-        listaSaldi.add(saldo_6);
-    }
+    public Saldo getSaldo (int idSaldo, int saldoTot)
+    {
+
+        try {
+            String db = "jdbc:derby://localhost:1527/ammdb";
+            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
+            // Si mettono dei punti di domanda al posto dei valori
+            String sql = "select * from saldo where "
+                    + "id_saldo = ? saldoTot = ? ";
+            // Si crea un prepared statement
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            // Si associano valori e posizioni di placeholder
+           
+            stmt.setInt(1, idSaldo);
+            stmt.setInt(2, saldoTot);
+           
+            ResultSet set = stmt.executeQuery();
+
+            if (set.next()) {
+                Saldo saldo = new Saldo();
+                saldo.idSaldo = set.getInt(idSaldo);
+                saldo.saldoTot = set.getInt(saldoTot);
+
+                stmt.close();
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+
+            Logger.getLogger(SaldoFactory.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return null;
+        
     
     //restituisce i saldi
-    public ArrayList <Saldo> getSaldolist()
+    /*public ArrayList <Saldo> getSaldolist()
        {
                     return listaSaldi;
        }
-       
+       */
         //restituisce il saldo in base all'id
-        public Saldo getSaldo(int idSaldo)
+        /*public Saldo getSaldo(int idSaldo)
         {
             for(Saldo u : listaSaldi)
             {
@@ -71,6 +85,15 @@ public class SaldoFactory {
         }
         
         return null;
+    }*/
+    }
+
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
     }
    
 }
