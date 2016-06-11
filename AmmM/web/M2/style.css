@@ -102,9 +102,9 @@ tr:nth-child(odd)
 .pulsanti
 {
    border-bottom-color: aquamarine;
-   text-align: center;
+   /*text-align: center;*/
    margin: 5px;
-   width: 400px;
+   width: 30%;
        
 }
 

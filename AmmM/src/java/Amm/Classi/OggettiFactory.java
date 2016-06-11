@@ -86,18 +86,16 @@ public class OggettiFactory {
 
         return null;
     }
-     public Oggetti_vendita getCrea(int idOggetto) throws SQLException{
+     ArrayList<Oggetti_vendita> lista = new ArrayList <Oggetti_vendita>();
+     public ArrayList<Oggetti_vendita> getCrea(int idOggetto) throws SQLException{
 
     try {
             String db = "jdbc:derby://localhost:1527/ammdb";
-            //String dbpath = "jdbc:derby:" + this.getServletContext().getAttribute("db");
-            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore");
-            Statement stmt = conn.createStatement();
-            String sql1;
-            sql1 = "INSERT INTO oggetto (id_oggetto,nome, url, "
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore"); 
+            String query = "INSERT INTO oggetto (id_oggetto,nome, url, "
                 + "prezzo, quantita, id_venditore, id_saldo)"+"VALUES(?,?,?,?,?,?)";
         
-             PreparedStatement stmt = conn.prepareStatement(sql1);
+             PreparedStatement stmt = conn.prepareStatement(query);
             // Si associano valori e posizioni di placeholder
             stmt.setInt(1, id_oggetto);
             stmt.setString(2, nome);
@@ -114,6 +112,7 @@ public class OggettiFactory {
                 oggetto.prezzo = set.getInt(prezzo);
                 oggetto.quantita = set.getInt(quantita);
                 oggetto.url = set.getString("url");
+                lista.add(oggetto);
 
             stmt.close();
             conn.close();
@@ -122,8 +121,46 @@ public class OggettiFactory {
             Logger.getLogger(OggettiFactory.class.getName()).log(Level.SEVERE, null, e);
         }
     
-        return Oggetti_vendita;
+        return lista;
         }
+     public ArrayList<Oggetti_vendita> getrecuperaOggetto(String text)
+    {
+        ArrayList<Oggetti_vendita> lista = new ArrayList<Oggetti_vendita>();
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore" );
+            String query = "select *" +
+                           "from oggetto " + 
+                           "where oggetto.nome LIKE ?";         
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Assegna dati
+            text = "%"+text+"%";
+            stmt.setString(1, text);
+            ResultSet res = stmt.executeQuery();
+            
+            while(res.next())
+            {
+                Oggetti_vendita current = new Oggetti_vendita();
+                current.setIdoggetto(res.getInt("id"));
+                current.setNome(res.getString("nome"));
+                current.setPrezzo(res.getInt("prezzo"));
+                current.setPrezzo(res.getInt("quantita"));
+                current.setPrezzo(res.getInt("prezzo"));
+                current.setUrl (res.getString("url"));
+                lista.add(current);
+            }
+            
+            stmt.close();
+            conn.close();
+        }
+        catch(SQLException e)
+        {}
+        
+        return lista;
+    }
+    
+    
  public void setConnectionString(String s) {
         this.connectionString = s;
     }

@@ -57,8 +57,19 @@
                 <td> "${oggetto.getPrezzo()}" </td>
                 <td> "${oggetto.getQuantita()}" </td>
                 <td> <a href="cliente.html=${oggetto.getIdoggetto}"> Aggiungi al carrello </a> </td>
-                </c:forEach>
-            </tr>
+                            
+                <!-- Tasto Ricerca -->
+                <label for="ricerca"> Filtra </label>
+                <input type="textfield" id="ricerca" size="25"/>
+                <!-- Lista Oggetti -->
+                <td> id="listaOggetti"
+                var="oggetto" items="${listaOggetti}">
+                name="oggetto">${oggetto.nome} 
+                <a href="filtra?oggettoId=${oggetto.id}">
+                    Registra esame
+                </a> </td>
+            </c:forEach>
+        </tr>
            
         </table> 
         
