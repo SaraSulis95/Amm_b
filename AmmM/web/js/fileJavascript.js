@@ -13,10 +13,10 @@ $(document).ready(function ()
        
         $.ajax(
         {
-            url: "filter",
+            url: "filter.json",
             data:{
               cmd: "search",
-              text: text
+              q: text
             },
             dataType: 'json',
             success : function(data, state){
@@ -31,26 +31,28 @@ $(document).ready(function ()
         {
             // Cancella la lista
             $("#listaOggetti").empty();
-            // Per ogni alunno trovato dal database
+            
+            if(listaOggetti.length > 0)
+            // Per ogni oggetto trovato dal database
             for(var oggetto in listaOggetti)
             {
-                // Crea un nuovo tag li
-                var newli = document.createElement("li");
-                newli.setAttribute("name", "oggetto");
+                // Crea un nuovo tag tr
+                var newtr = document.createElement("tr");
+                newtr.setAttribute("name", "oggetto");
                 // testo
                 var text = document.createTextNode(listaOggetti[oggetto].nome + 
                         " " + listaOggetti[oggetto].url + " " + listaOggetti[oggetto].quantita + " "
                         + listaOggetti[oggetto].prezzo + " " + listaOggetti[oggetto].id + " ");
-                newli.appendChild(text);
+                newtr.appendChild(text);
                 // Crea link
                 var link = document.createElement("a");
                 link.setAttribute("href", "filtra?oggettoId="+listaOggetti[oggetto].id);
                 var fieldTxt = document.createTextNode("Aggiungi oggetto");
                 link.appendChild(fieldTxt);
-                newli.appendChild(link);
+                newtr.appendChild(link);
                 
-                // Aggiunge il tag li al tag ul
-                $("#listaOggetti").append(newli);
+                // Aggiunge il tag tr alla tabella
+                $("#listaOggetti").append(newtr);
             }
         }
     }); 

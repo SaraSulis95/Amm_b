@@ -52,7 +52,7 @@ public class Cliente_factory {
                     + "username = ? and password = ? ";
             // Si crea un prepared statement
             PreparedStatement stmt = conn.prepareStatement(sql);
-// Si associano valori e posizioni di placeholder
+            // Si associano valori e posizioni di placeholder
             stmt.setString(1, username);
             stmt.setString(2, password);
 

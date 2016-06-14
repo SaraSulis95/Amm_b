@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,15 +124,15 @@ public class OggettiFactory {
         }
      public ArrayList<Oggetti_vendita> getrecuperaOggetto(String text)
     {
-        ArrayList<Oggetti_vendita> lista = new ArrayList<Oggetti_vendita>();
+        ArrayList<Oggetti_vendita> lista_b = new ArrayList <Oggetti_vendita>();
         
         try
         {
-            Connection conn = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore" );
+            Connection conn_b = DriverManager.getConnection(connectionString, "Saradb", "HomeDecore" );
             String query = "select *" +
                            "from oggetto " + 
                            "where oggetto.nome LIKE ?";         
-            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt = conn_b.prepareStatement(query);
             // Assegna dati
             text = "%"+text+"%";
             stmt.setString(1, text);
@@ -146,18 +145,17 @@ public class OggettiFactory {
                 current.setNome(res.getString("nome"));
                 current.setPrezzo(res.getInt("prezzo"));
                 current.setPrezzo(res.getInt("quantita"));
-                current.setPrezzo(res.getInt("prezzo"));
                 current.setUrl (res.getString("url"));
-                lista.add(current);
+                lista_b.add(current);
             }
             
             stmt.close();
-            conn.close();
+            conn_b.close();
         }
         catch(SQLException e)
         {}
         
-        return lista;
+        return lista_b;
     }
     
     

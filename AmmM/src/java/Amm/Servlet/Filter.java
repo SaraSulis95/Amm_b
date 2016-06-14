@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,19 +26,27 @@ public class Filter extends HttpServlet {
     
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                // Controlla se è stato inviato un commando
+               
         
+                  HttpSession session = request.getSession(true);
+        
+        /*controllare se si sono autenticati in modo esatto*/
+        if (request.getParameter("Submit") != null) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            
+             // Controlla se è stato inviato un commando
         String command = request.getParameter("cmd");
         if (command != null) 
         {
             // Verifica che commando e id siano stati impostati
-            if (command.equals("search")) 
+            if (command.equals("search") && request.getParameter("q")!=null) 
             {
                 // ID oggetto
                 
                 // Esegue la ricerca
                 ArrayList<Oggetti_vendita> listaOggetti = OggettiFactory.getInstance()
-                        .getrecuperaOggetto(request.getParameter("text"));
+                        .getrecuperaOggetto(request.getParameter("q"));
                 // Imposto la lista come attributo della request, come facevamo per l'HTML
                 request.setAttribute("listaOggetti", listaOggetti);
                 

@@ -39,7 +39,11 @@
         </nav>
         </div>
         
-        
+
+        <!-- Tasto Ricerca -->
+        <label for="ricerca"> Filtra </label>
+        <input id="ricerca" size="25"/>
+ 
         <table>
             <tr>
                 <th> Nome </th>
@@ -50,29 +54,20 @@
             </tr>
             <tr>
                 <c:forEach var = "oggetto" items = "${listaOggetti}">
-                <!--genero gli oggetti dinamicamente-->
-                <td> "${oggetto.getNome}" </td>
-                <td> <img src="${oggetto.getUrl}" title="${oggetto.getNome()}"
-                      alt="${oggetto.getNome}"></td>
-                <td> "${oggetto.getPrezzo()}" </td>
-                <td> "${oggetto.getQuantita()}" </td>
-                <td> <a href="cliente.html=${oggetto.getIdoggetto}"> Aggiungi al carrello </a> </td>
-                            
-                <!-- Tasto Ricerca -->
-                <label for="ricerca"> Filtra </label>
-                <input type="textfield" id="ricerca" size="25"/>
-                <!-- Lista Oggetti -->
-                <td> id="listaOggetti"
-                var="oggetto" items="${listaOggetti}">
-                name="oggetto">${oggetto.nome} 
-                <a href="filtra?oggettoId=${oggetto.id}">
-                    Registra esame
-                </a> </td>
+                    <!--genero gli oggetti dinamicamente-->
+                    <td> "${oggetto.getNome}" </td>
+                    <td> <img src="${oggetto.getUrl}" title="${oggetto.getNome()}"
+                              alt="${oggetto.getNome}"></td>
+                    <td> "${oggetto.getPrezzo()}" </td>
+                    <td> "${oggetto.getQuantita()}" </td>
+                    <td> <a href="cliente.html=${oggetto.getIdoggetto}"> Aggiungi al carrello </a> </td>
+
+                  
             </c:forEach>
-        </tr>
-           
+            </tr>
+
         </table> 
-        
+
         
         <div class="footer">
             <jsp:include page="ripetuti.jsp"/>           
